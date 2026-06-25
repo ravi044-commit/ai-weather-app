@@ -78,7 +78,7 @@ const CLAUDE = async (system, userMsg, useSearch = false) => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "x-api-key": import.meta.env.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,  // ← your key
+      "x-api-key": import.meta.env.VITE_ANTHROPIC_KEY=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,  // ← your key
       "anthropic-version": "2023-06-01",                 // ← required
     },
     body: JSON.stringify(body),
