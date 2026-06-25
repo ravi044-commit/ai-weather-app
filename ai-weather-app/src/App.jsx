@@ -64,28 +64,24 @@ function getMoonPhase() {
 const AQI_COLORS = {
   "Good":"#00e676","Fair":"#ffee58","Moderate":"#ff9800","Poor":"#f44336","Very Poor":"#9c27b0"
 };
-
 const CLAUDE = async (system, userMsg, useSearch = false) => {
   const body = {
-    model: "claude-sonnet-4-6",
+    model: "claude-haiku-4-5-20251001",
     max_tokens: 1500,
     system,
     messages: [{ role: "user", content: userMsg }],
   };
   if (useSearch) body.tools = [{ type: "web_search_20250305", name: "web_search" }];
 
-  const r = await fetch("https://api.anthropic.com/v1/messages", {
+  const r = await fetch("/api/claude", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": import.meta.env.VITE_ANTHROPIC_KEY=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,  // ← your key
-      "anthropic-version": "2023-06-01",                 // ← required
-    },
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
   const d = await r.json();
   return d.content.filter(b => b.type === "text").map(b => b.text).join("");
 };
+
 
 // ═══════════════════════════════════════════════════════════════════════════════
 // GLOBAL CSS
