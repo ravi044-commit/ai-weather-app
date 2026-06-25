@@ -73,14 +73,11 @@ const CLAUDE = async (system, userMsg, useSearch = false) => {
   };
   if (useSearch) body.tools = [{ type: "web_search_20250305", name: "web_search" }];
 
-  const r = await fetch("/api/claude", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-  const d = await r.json();
-  return d.content.filter(b => b.type === "text").map(b => b.text).join("");
-};
+ const r = await fetch("/api/claude", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(body),
+});
 
 
 // ═══════════════════════════════════════════════════════════════════════════════
